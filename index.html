@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="de" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delulu Future Dev</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/_sdk/element_sdk.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&amp;family=Rajdhani:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        box-sizing: border-box;
+      }
+
+      @keyframes neonPulse {
+        0%,
+        100% {
+          filter: drop-shadow(0 0 5px currentColor)
+            drop-shadow(0 0 10px currentColor);
+        }
+        50% {
+          filter: drop-shadow(0 0 15px currentColor)
+            drop-shadow(0 0 30px currentColor);
+        }
+      }
+
+      @keyframes glitch {
+        0% {
+          transform: translate(0);
+        }
+        20% {
+          transform: translate(-2px, 2px);
+        }
+        40% {
+          transform: translate(-2px, -2px);
+        }
+        60% {
+          transform: translate(2px, 2px);
+        }
+        80% {
+          transform: translate(2px, -2px);
+        }
+        100% {
+          transform: translate(0);
+        }
+      }
+
+      @keyframes scanline {
+        0% {
+          transform: translateY(-100%);
+        }
+        100% {
+          transform: translateY(100%);
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      @keyframes borderFlow {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .neon-text {
+        animation: neonPulse 2s ease-in-out infinite;
+      }
+
+      .glitch-hover:hover {
+        animation: glitch 0.3s ease-in-out infinite;
+      }
+
+      .float-animation {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .scanline::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 10px;
+        background: linear-gradient(
+          transparent,
+          rgba(0, 255, 255, 0.1),
+          transparent
+        );
+        animation: scanline 4s linear infinite;
+        pointer-events: none;
+      }
+
+      .cyber-border {
+        background: linear-gradient(90deg, #ff00ff, #00ffff, #ff00ff);
+        background-size: 200% 200%;
+        animation: borderFlow 3s ease infinite;
+      }
+
+      .grid-bg {
+        background-image: linear-gradient(
+            rgba(36, 255, 0, 0.03) 1px,
+            transparent 1px
+          ),
+          linear-gradient(90deg, rgba(36, 255, 0, 0.03) 1px, transparent 1px);
+        background-size: 50px 50px;
+      }
+
+      .card-glow:hover {
+        box-shadow: 0 0 30px rgba(255, 0, 255, 0.3),
+          0 0 60px rgba(0, 255, 255, 0.2);
+      }
+
+      .text-gradient {
+        background: linear-gradient(90deg, #ff00ff, #00ffff, #ff00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .nav-link {
+        position: relative;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #ff00ff, #00ffff);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .value-card {
+        clip-path: polygon(
+          0 10px,
+          10px 0,
+          100% 0,
+          100% calc(100% - 10px),
+          calc(100% - 10px) 100%,
+          0 100%
+        );
+      }
+
+      .service-card {
+        clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #0a0a0f;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #ff00ff, #00ffff);
+        border-radius: 4px;
+      }
+    </style>
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  </head>
+  <body class="h-full bg-[#0a0a0f] text-gray-100 overflow-x-hidden">
+    <div id="app-wrapper" class="w-full h-full overflow-auto">
+      <!-- Animated Background -->
+      <div class="fixed inset-0 grid-bg pointer-events-none"></div>
+      <div class="fixed inset-0 pointer-events-none">
+        <div
+          class="absolute top-20 left-10 w-64 h-64 bg-fuchsia-500/10 rounded-full blur-3xl float-animation"
+        ></div>
+        <div
+          class="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl float-animation"
+          style="animation-delay: -3s"
+        ></div>
+        <div
+          class="absolute top-1/2 left-1/2 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl float-animation"
+          style="animation-delay: -1.5s"
+        ></div>
+      </div>
+      <!-- Navigation -->
+      <nav
+        class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#0a0a0f]/80 border-b border-cyan-500/20"
+      >
+        <div
+          class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"
+        >
+          <div class="flex items-center gap-2">
+            <div class="w-10 h-10 cyber-border p-[2px] rotate-45">
+              <div
+                class="w-full h-full bg-[#0a0a0f] flex items-center justify-center"
+              >
+                <span
+                  class="text-lg font-bold -rotate-45"
+                  style="font-family: 'Orbitron', sans-serif"
+                  >D</span
+                >
+              </div>
+            </div>
+            <span
+              class="text-xl font-bold tracking-wider hidden sm:block"
+              style="font-family: 'Orbitron', sans-serif"
+              >DELULU</span
+            >
+          </div>
+          <div class="flex items-center gap-8">
+            <a
+              href="#about"
+              class="nav-link text-sm tracking-wider hover:text-cyan-400 transition-colors"
+              style="font-family: 'Rajdhani', sans-serif"
+              >ABOUT</a
+            >
+            <a
+              href="#values"
+              class="nav-link text-sm tracking-wider hover:text-cyan-400 transition-colors"
+              style="font-family: 'Rajdhani', sans-serif"
+              >VALUES</a
+            >
+            <a
+              href="#services"
+              class="nav-link text-sm tracking-wider hover:text-cyan-400 transition-colors"
+              style="font-family: 'Rajdhani', sans-serif"
+              >SERVICES</a
+            >
+            <a
+              href="#manifest"
+              class="nav-link text-sm tracking-wider hover:text-cyan-400 transition-colors"
+              style="font-family: 'Rajdhani', sans-serif"
+              >MANIFEST</a
+            >
+          </div>
+        </div>
+      </nav>
+      <!-- Hero Section -->
+      <section
+        class="relative min-h-screen flex items-center justify-center px-6 pt-20 scanline"
+      >
+        <div class="text-center max-w-5xl mx-auto relative z-10">
+          <div class="mb-6 inline-block">
+            <span
+              class="text-sm tracking-[0.3em] text-cyan-400 uppercase"
+              style="font-family: 'Rajdhani', sans-serif"
+              >Creative Tech Studio</span
+            >
+          </div>
+          <h1
+            id="hero-title"
+            class="text-5xl sm:text-7xl md:text-8xl font-black mb-6"
+            style="font-family: 'Orbitron', sans-serif"
+          >
+            <span class="text-white">DELULU</span> <br /><span
+              class="text-white"
+              >FUTURE DEV</span
+            >
+          </h1>
+          <p
+            id="hero-tagline"
+            class="text-xl sm:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto"
+            style="font-family: 'Rajdhani', sans-serif; font-weight: 300"
+          >
+            Geboren aus Chaos, Popkultur und dem Wunsch, Dinge zu erschaffen,
+            die wirklich vibrieren.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              class="px-8 py-4 cyber-border text-white font-bold tracking-wider transition-all hover:scale-105 glitch-hover"
+              style="font-family: 'Orbitron', sans-serif"
+            >
+              <span class="block bg-[#0a0a0f] px-6 py-2">EXPLORE ⚡</span>
+            </button>
+            <button
+              class="px-8 py-4 border border-cyan-500/50 text-cyan-400 font-bold tracking-wider hover:bg-cyan-500/10 transition-all"
+              style="font-family: 'Orbitron', sans-serif"
+            >
+              CONNECT 🌐
+            </button>
+          </div>
+          <!-- Decorative Elements -->
+          <div class="absolute -bottom-20 left-1/2 transform -translate-x-1/2">
+            <svg
+              class="w-6 h-12 text-cyan-400 animate-bounce"
+              fill="none"
+              stroke="currentColor"
+              viewbox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 14l-7 7m0 0l-7-7m7 7V3"
+              ></path>
+            </svg>
+          </div>
+        </div>
+      </section>
+      <!-- About Section -->
+      <section id="about" class="relative py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <span
+                class="text-cyan-400 text-sm tracking-[0.2em] uppercase mb-4 block"
+                style="font-family: 'Rajdhani', sans-serif"
+                >🌈 WHO WE ARE</span
+              >
+              <h2
+                id="about-title"
+                class="text-4xl sm:text-5xl font-black mb-8 text-gradient"
+                style="font-family: 'Orbitron', sans-serif"
+              >
+                Wer wir sind
+              </h2>
+              <div
+                class="space-y-6 text-gray-300"
+                style="
+                  font-family: 'Rajdhani', sans-serif;
+                  font-weight: 400;
+                  font-size: 1.1rem;
+                  line-height: 1.8;
+                "
+              >
+                <p>
+                  Wir bewegen uns zwischen
+                  <span class="text-[#ff0073]">Kunst und Algorithmus</span>,
+                  zwischen
+                  <span class="text-[#24ff00]">Intuition und Daten</span>,
+                  zwischen <span class="text-[#e3ff00]">Meme und Methode</span>.
+                </p>
+                <p class="text-xl font-semibold text-white">
+                  Wir sind keine Agentur.
+                </p>
+                <p>
+                  Wir sind ein
+                  <span class="text-[#ff0073]">Labor der Möglichkeiten</span>,
+                  in dem Designer:innen, Entwickler:innen, Strateg:innen, Gamer,
+                  Storyteller und Kreative der Zukunft zusammenkommen, um
+                  digitale Magie zu erschaffen.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="mt-20 p-8 border border-fuchsia-500/30 bg-fuchsia-500/5 backdrop-blur-sm"
+          >
+            <p
+              class="text-center text-lg text-gray-300"
+              style="font-family: 'Rajdhani', sans-serif"
+            >
+              Hier ist Kreativität
+              <span class="text-[#ff0073] font-semibold">inklusiv</span>,
+              <span class="text-[#24ff00] font-semibold">expansiv</span> und
+              <span class="text-[#e3ff00] font-semibold"
+                >frei von Gatekeeping</span
+              >. <br />
+              Wir feiern die Vielfalt von Stimmen, Disziplinen und Stilen, weil
+              wir wissen: <br /><span class="text-white font-bold"
+                >Innovation entsteht nicht dadurch, dass alle gleich denken,
+                sondern indem wir gemeinsam erschaffen.</span
+              >
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- Vision Section -->
+      <section
+        class="relative py-32 px-6 bg-gradient-to-b from-transparent via-fuchsia-950/20 to-transparent"
+      >
+        <div class="max-w-5xl mx-auto text-center">
+          <span
+            class="text-fuchsia-400 text-sm tracking-[0.2em] uppercase mb-4 block"
+            style="font-family: 'Rajdhani', sans-serif"
+            >💭 OUR VISION</span
+          >
+          <h2
+            id="vision-title"
+            class="text-4xl sm:text-5xl font-black mb-12 text-gradient"
+            style="font-family: 'Orbitron', sans-serif"
+          >
+            Unsere Vision
+          </h2>
+          <div class="relative mb-16">
+            <div class="absolute inset-0 cyber-border opacity-20 blur-xl"></div>
+            <div
+              class="relative bg-[#0a0a0f]/80 border border-cyan-500/30 p-10"
+            >
+              <p
+                class="text-xl sm:text-2xl text-gray-200 leading-relaxed"
+                style="font-family: 'Rajdhani', sans-serif"
+              >
+                Eine globale kreative Community zu sein, in der sich
+                <span class="text-[#24ff00]">Vorstellungskraft</span>,
+                <span class="text-[#ff0073]">Technologie</span> und
+                <span class="text-[#e3ff00]">Empathie</span> verbinden, um eine
+                schönere, zugänglichere und menschlichere Zukunft zu gestalten.
+              </p>
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-8">
+            <div
+              class="p-6 border border-fuchsia-500/30 bg-fuchsia-500/5 card-glow transition-all"
+            >
+              <div class="text-3xl mb-4">🌟</div>
+              <p
+                class="text-gray-300"
+                style="font-family: 'Rajdhani', sans-serif"
+              >
+                Wir wollen eine Welt, in der
+                <span class="text-[#ff0073] font-bold">delulu ideas</span> zu
+                <span class="text-[#24ff00] font-bold">solu realities</span>
+                werden – in der Träumen nicht lächerlich, sondern revolutionär
+                ist.
+              </p>
+            </div>
+            <div
+              class="p-6 border border-cyan-500/30 bg-cyan-500/5 card-glow transition-all"
+            >
+              <div class="text-3xl mb-4">🌈</div>
+              <p
+                class="text-gray-300"
+                style="font-family: 'Rajdhani', sans-serif"
+              >
+                Eine Zukunft, in der Marken, Menschen und Kulturen sich in
+                <span class="text-[#ff0073]">Ästhetik</span>,
+                <span class="text-[#24ff00]">Emotion</span> und
+                <span class="text-[#e3ff00]">echtem Impact</span> begegnen.
+              </p>
+            </div>
+          </div>
+          <div class="mt-16 inline-block cyber-border p-[2px]">
+            <div class="bg-[#0a0a0f] px-8 py-4">
+              <span
+                class="text-sm tracking-wider text-gray-400"
+                style="font-family: 'Rajdhani', sans-serif"
+                >🧠 KURZVISION:</span
+              >
+              <p
+                id="vision-short"
+                class="text-xl font-bold text-white mt-2"
+                style="font-family: 'Orbitron', sans-serif"
+              >
+                Zukunft erschaffen – mit Sinn, Code und Glitter.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Values Section -->
+      <section id="values" class="relative py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-16">
+            <span
+              class="text-cyan-400 text-sm tracking-[0.2em] uppercase mb-4 block"
+              style="font-family: 'Rajdhani', sans-serif"
+              >💫 OUR VALUES</span
+            >
+            <h2
+              id="values-title"
+              class="text-4xl sm:text-5xl font-black text-gradient"
+              style="font-family: 'Orbitron', sans-serif"
+            >
+              Unsere Werte
+            </h2>
+          </div>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Value 1 -->
+            <div
+              class="value-card bg-gradient-to-br from-fuchsia-900/30 to-transparent border border-fuchsia-500/30 p-6 card-glow transition-all hover:-translate-y-2"
+            >
+              <div class="text-4xl mb-4">🌍</div>
+              <h3
+                class="text-xl font-bold text-[#ff0073] mb-3"
+                style="font-family: 'Orbitron', sans-serif"
+              >
+                Radikale Inklusivität
+              </h3>
+              <p
+                class="text-gray-400 text-sm mb-4"
+                style="font-family: 'Rajdhani', sans-serif"
+              >
+                Hier haben alle Platz. Egal, woher du kommst, welche Sprache du
+                sprichst oder welche Pronomen du benutzt.
+              </p>
+              <p
+                class="text-[#ff0073] text-sm font-semibold"
+                style="font-family: 'Rajdhani', sans-serif"
+              >
+                💖 Wir reden nicht nur über Diversität – wir designen sie.
+              </p>
+            </div>
+            <!-- Value 2 -->
+            <div
+              class="value-card bg-gradient-to-br from-cyan-900/30 to-transparent border border-cyan-500/30 p-6 card-glow transition-all hover:-translate-y-2"
+            >
+              <div class="text-4xl mb-4">⚙️</div>
+              <h3
+                class="text-xl font-bold text-[#24ff00] mb-3"
+                style="font-family: 'Orbitron', sans-serif"
+              >
+                Kreativität ohne Grenzen
+              </h3>
+              <p
+                class="text-gray-400 text-sm mb-4"
+                style="font-family: 'Rajdhani', sans-serif"
+              >
+                Wir glauben nicht an Schubladen, wir glauben an Verbindungen.
+                Design, Development, Kunst, Strategie – alles fließt.
+              </p>
+              <p
+                class="text-[#24ff00] text-sm font-semibold"
+                style="font-family: 'Rajdhani', sans-serif"
+              >
+                🎨 Innovation entsteht dort, wo Welten aufeinandertreffen.
+              </p>
+            </div>
+            <!-- Value 3 -->
+            <div
+              class="value-card bg-gradient-to-br from-purple-900/30 to-transparent border border-purple-500/30 p-6 card-glow transition-all hover:-translate-y-2"
+            >
+              <div class="text-4xl mb-4">💡</div>
+              <h3
+                class="text-xl font-bold text-[#e3ff00] mb-3"
+                style="font-family: 'Orbitron', sans-serif"
+              >
+                Technologie mit Seele
+              </h3>
+              <p
+                class="text-gray-400 text-sm mb-4"
+                style="font-family: 'Rajdhani', sans-serif"
+              >
+                Auch Code kann fühlen. Wir erschaffen digitale Erlebnisse, die
+                funktionieren, berühren und verbinden.
+              </p>
+              <p
+                class="text-[#e3ff00] text-sm font-semibold"
+                style="font-family: 'Rajdhani', sans-serif"
+              >
+                ✨ Tech muss nicht kalt sein – sie kann Vibe haben.
+              </p>
+            </div>
+            <!-- Value 4 -->
+            <div
+              class="value-card bg-gradient-to-br from-pink-900/30 to-transparent border border-pink-500/30 p-6 card-glow transition-all hover:-translate-y-2"
+            >
+              <div class="text-4xl mb-4">🔮</div>
+              <h3
+                class="text-xl font-bold text-[#ff2e00] mb-3"
+                style="font-family: 'Orbitron', sans-serif"
+              >
+                Kultur + Strategie
+              </h3>
+              <p
+                class="text-gray-400 text-sm mb-4"
+                style="font-family: 'Rajdhani', sans-serif"
+              >
+                Wir lesen Trends, aber wir folgen ihnen nicht blind. Wir
+                verstehen sie, hacken sie und verwandeln sie in Chancen.
+              </p>
+              <p
+                class="text-[#ff2e00] text-sm font-semibold"
+                style="font-family: 'Rajdhani', sans-serif"
+              >
+                📡 Wir sind nicht Teil des Rauschens – wir sind die Frequenz.
+              </p>
+            </div>
+            <!-- Value 5 -->
+            <div
+              class="value-card bg-gradient-to-br from-emerald-900/30 to-transparent border border-emerald-500/30 p-6 card-glow transition-all hover:-translate-y-2 sm:col-span-2 lg:col-span-1"
+            >
+              <div class="text-4xl mb-4">🫶</div>
+              <h3
+                class="text-xl font-bold text-[#24ff00] mb-3"
+                style="font-family: 'Orbitron', sans-serif"
+              >
+                Kollaboration &amp; Community
+              </h3>
+              <p
+                class="text-gray-400 text-sm mb-4"
+                style="font-family: 'Rajdhani', sans-serif"
+              >
+                Ego innoviert nicht – Communities schon. Wir bauen auf Zuhören,
+                Lachen und kollektives Brainstorming.
+              </p>
+              <p
+                class="text-[#24ff00] text-sm font-semibold"
+                style="font-family: 'Rajdhani', sans-serif"
+              >
+                💬 Wissen zu teilen ist die neue Form von Leadership.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Services Section -->
+      <section
+        id="services"
+        class="relative py-32 px-6 bg-gradient-to-b from-transparent via-[#24ff00]/10 to-transparent"
+      >
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-16">
+            <span
+              class="text-[#e3ff00] text-sm tracking-[0.2em] uppercase mb-4 block"
+              style="font-family: 'Rajdhani', sans-serif"
+              >��� WHAT WE DO</span
+            >
+            <h2
+              id="services-title"
+              class="text-4xl sm:text-5xl font-black text-gradient"
+              style="font-family: 'Orbitron', sans-serif"
+            >
+              Was wir tun
+            </h2>
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Service 1 -->
+            <div
+              class="service-card group bg-[#1800ad] border border-[#24ff00]/30 p-6 hover:border-[#24ff00] transition-all card-glow"
+            >
+              <div class="flex items-center gap-3 mb-4">
+                <span class="text-3xl">🖥️</span>
+                <span
+                  class="text-[#24ff00] text-xs tracking-wider"
+                  style="font-family: 'Rajdhani', sans-serif"
+                  >01</span
+                >
+              </div>
+              <h3
+                class="text-lg font-bold text-white mb-3"
+                style="font-family: 'Orbitron', sans-serif"
+              >
+                Apps &amp; Sites, die slayen
+              </h3>
+              <p
+                class="text-gray-300 text-sm"
+                style="font-family: 'Rajdhani', sans-serif"
+              >
+                Digitale Erlebnisse, so flüssig wie dein Purpose. UX mit Seele,
+                UI mit Glitter, Ergebnisse mit Impact.
+              </p>
+            </div>
+            <!-- Service 2 -->
+            <div
+              class="service-card group bg-[#1800ad] border border-[#e3ff00]/30 p-6 hover:border-[#e3ff00] transition-all card-glow"
+            >
+              <div class="flex items-center gap-3 mb-4">
+                <span class="text-3xl">🔮</span>
+                <span
+                  class="text-[#e3ff00] text-xs tracking-wider"
+                  style="font-family: 'Rajdhani', sans-serif"
+                  >02</span
+                >
+              </div>
+              <h3
+                class="text-lg font-bold text-white mb-3"
+                style="font-family: 'Orbitron', sans-serif"
+              >
+                Trends → Vorteile
+              </h3>
+              <p
+                class="text-gray-300 text-sm"
+                style="font-family: 'Rajdhani', sans-serif"
+              >
+                Coolhunting, Analyse und Popkultur kombiniert mit Daten. Wir
+                erkennen, was vibriert, bevor es explodiert.
+              </p>
+            </div>
+            <!-- Service 3 -->
+            <div
+              class="service-card group bg-[#1800ad] border border-[#ff0073]/30 p-6 hover:border-[#ff0073] transition-all card-glow"
+            >
+              <div class="flex items-center gap-3 mb-4">
+                <span class="text-3xl">🎨</span>
+                <span
+                  class="text-[#ff0073] text-xs tracking-wider"
+                  style="font-family: 'Rajdhani', sans-serif"
+                  >03</span
+                >
+              </div>
+              <h3
+                class="text-lg font-bold text-white mb-3"
+                style="font-family: 'Orbitron', sans-serif"
+              >
+                Markenidentität mit Vibe
+              </h3>
+              <p
+                class="text-gray-300 text-sm"
+                style="font-family: 'Rajdhani', sans-serif"
+              >
+                Wir erschaffen deine Stimme, deinen Look und deine Energie.
+                Nicht nur Branding – eine Main-Character-Identity.
+              </p>
+            </div>
+            <!-- Service 4 -->
+            <div
+              class="service-card group bg-[#1800ad] border border-[#e3ff00]/30 p-6 hover:border-[#e3ff00] transition-all card-glow"
+            >
+              <div class="flex items-center gap-3 mb-4">
+                <span class="text-3xl">💅</span>
+                <span
+                  class="text-[#e3ff00] text-xs tracking-wider"
+                  style="font-family: 'Rajdhani', sans-serif"
+                  >04</span
+                >
+              </div>
+              <h3
+                class="text-lg font-bold text-white mb-3"
+                style="font-family: 'Orbitron', sans-serif"
+              >
+                Content, der sich anfühlt
+              </h3>
+              <p
+                class="text-gray-300 text-sm"
+                style="font-family: 'Rajdhani', sans-serif"
+              >
+                Fotografie, Design, Copy, Storytelling und emotionale Ästhetik.
+                Verbindung &gt; Aufmerksamkeit.
+              </p>
+            </div>
+            <!-- Service 5 -->
+            <div
+              class="service-card group bg-[#1800ad] border border-[#24ff00]/30 p-6 hover:border-[#24ff00] transition-all card-glow"
+            >
+              <div class="flex items-center gap-3 mb-4">
+                <span class="text-3xl">🤝</span>
+                <span
+                  class="text-[#24ff00] text-xs tracking-wider"
+                  style="font-family: 'Rajdhani', sans-serif"
+                  >05</span
+                >
+              </div>
+              <h3
+                class="text-lg font-bold text-white mb-3"
+                style="font-family: 'Orbitron', sans-serif"
+              >
+                Communities mit Seele
+              </h3>
+              <p
+                class="text-gray-300 text-sm"
+                style="font-family: 'Rajdhani', sans-serif"
+              >
+                Strategien für echte Fandoms – keine leeren Followerzahlen.
+                Likes kommen und gehen. Beziehungen bleiben.
+              </p>
+            </div>
+            <!-- Service 6 -->
+            <div
+              class="service-card group bg-[#1800ad] border border-[#ff0073]/30 p-6 hover:border-[#ff0073] transition-all card-glow"
+            >
+              <div class="flex items-center gap-3 mb-4">
+                <span class="text-3xl">📰</span>
+                <span
+                  class="text-[#ff0073] text-xs tracking-wider"
+                  style="font-family: 'Rajdhani', sans-serif"
+                  >06</span
+                >
+              </div>
+              <h3
+                class="text-lg font-bold text-white mb-3"
+                style="font-family: 'Orbitron', sans-serif"
+              >
+                Editorial &amp; Trends
+              </h3>
+              <p
+                class="text-gray-300 text-sm"
+                style="font-family: 'Rajdhani', sans-serif"
+              >
+                Magazin und digitales Radar für alles, was in Design, Kultur und
+                Technologie vibriert.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Manifest Section -->
+      <section id="manifest" class="relative py-32 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+          <span
+            class="text-[#24ff00] text-sm tracking-[0.2em] uppercase mb-4 block"
+            style="font-family: 'Rajdhani', sans-serif"
+            >✨ MANIFESTO</span
+          >
+          <h2
+            id="manifest-title"
+            class="text-4xl sm:text-5xl font-black text-gradient mb-16"
+            style="font-family: 'Orbitron', sans-serif"
+          >
+            Delulu Manifest
+          </h2>
+          <div class="space-y-8">
+            <div
+              class="p-6 border-l-4 border-[#e3ff00] bg-[#e3ff00]/5 text-left"
+            >
+              <span class="text-2xl mr-3">💭</span>
+              <span
+                class="text-lg text-gray-100"
+                style="font-family: 'Rajdhani', sans-serif"
+                >Wir glauben, dass
+                <span class="text-[#e3ff00] font-bold"
+                  >angstfrei zu imaginieren</span
+                >
+                der erste Schritt ist, um die Welt zu verändern.</span
+              >
+            </div>
+            <div
+              class="p-6 border-l-4 border-[#24ff00] bg-[#24ff00]/5 text-left"
+            >
+              <span class="text-2xl mr-3">👾</span>
+              <span
+                class="text-lg text-gray-100"
+                style="font-family: 'Rajdhani', sans-serif"
+                >Dass Technologie
+                <span class="text-[#24ff00] font-bold"
+                  >inklusiv, schön und menschlich</span
+                >
+                sein kann.</span
+              >
+            </div>
+            <div
+              class="p-6 border-l-4 border-[#ff0073] bg-[#ff0073]/5 text-left"
+            >
+              <span class="text-2xl mr-3">🎨</span>
+              <span
+                class="text-lg text-gray-100"
+                style="font-family: 'Rajdhani', sans-serif"
+                >Dass Design nicht nur kommuniziert, sondern
+                <span class="text-[#ff0073] font-bold"
+                  >heilt, inspiriert und verbindet</span
+                >.</span
+              >
+            </div>
+            <div
+              class="p-6 border-l-4 border-[#e3ff00] bg-[#e3ff00]/5 text-left"
+            >
+              <span class="text-2xl mr-3">🌐</span>
+              <span
+                class="text-lg text-gray-100"
+                style="font-family: 'Rajdhani', sans-serif"
+                >Dass die Zukunft kein Ziel ist, sondern ein
+                <span class="text-[#e3ff00] font-bold">kollektives Design</span
+                >.</span
+              >
+            </div>
+          </div>
+          <div class="mt-20">
+            <div class="cyber-border p-[3px] inline-block">
+              <button
+                class="bg-[#1800ad] px-12 py-5 text-xl font-bold tracking-wider hover:bg-[#e3ff00]/10 transition-all glitch-hover"
+                style="font-family: 'Orbitron', sans-serif"
+              >
+                JOIN THE FUTURE ✨
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Footer -->
+      <footer class="relative py-16 px-6 border-t border-[#24ff00]/20">
+        <div class="max-w-6xl mx-auto">
+          <div
+            class="flex flex-col md:flex-row items-center justify-between gap-8"
+          >
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 cyber-border p-[2px] rotate-45">
+                <div
+                  class="w-full h-full bg-[#1800ad] flex items-center justify-center"
+                >
+                  <span
+                    class="text-xl font-bold -rotate-45"
+                    style="font-family: 'Orbitron', sans-serif"
+                    >D</span
+                  >
+                </div>
+              </div>
+              <div>
+                <span
+                  class="text-xl font-bold tracking-wider block"
+                  style="font-family: 'Orbitron', sans-serif"
+                  >DELULU FUTURE DEV</span
+                >
+                <span
+                  class="text-xs text-gray-400"
+                  style="font-family: 'Rajdhani', sans-serif"
+                  >Creative Tech Studio</span
+                >
+              </div>
+            </div>
+            <div class="flex items-center gap-6">
+              <a
+                href="#"
+                class="w-10 h-10 border border-[#e3ff00]/50 flex items-center justify-center hover:bg-[#e3ff00]/20 transition-all"
+              >
+                <span class="text-lg">🐦</span>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 border border-[#24ff00]/50 flex items-center justify-center hover:bg-[#24ff00]/20 transition-all"
+              >
+                <span class="text-lg">📸</span>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 border border-[#ff0073]/50 flex items-center justify-center hover:bg-[#ff0073]/20 transition-all"
+              >
+                <span class="text-lg">💼</span>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 border border-[#e3ff00]/50 flex items-center justify-center hover:bg-[#e3ff00]/20 transition-all"
+              >
+                <span class="text-lg">🎵</span>
+              </a>
+            </div>
+            <p
+              class="text-sm text-gray-400"
+              style="font-family: 'Rajdhani', sans-serif"
+            >
+              © 2025 Delulu Future Dev. All rights reserved. ✨
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script>
+      const defaultConfig = {
+        hero_title: "DELULU FUTURE DEV",
+        hero_tagline:
+          "Geboren aus Chaos, Popkultur und dem Wunsch, Dinge zu erschaffen, die wirklich vibrieren.",
+        about_title: "Wer wir sind",
+        vision_title: "Unsere Vision",
+        vision_short: "Zukunft erschaffen – mit Sinn, Code und Glitter.",
+        values_title: "Unsere Werte",
+        services_title: "Was wir tun",
+        manifest_title: "Delulu Manifest",
+        background_color: "#1800ad",
+        primary_accent: "#ff0073",
+        secondary_accent: "#24ff00",
+        text_color: "#f3f4f6",
+        surface_color: "#e3ff00",
+        font_family: "Orbitron",
+        font_size: 16,
+      };
+
+      async function onConfigChange(config) {
+        const heroTitleEl = document.getElementById("hero-title");
+        if (heroTitleEl) {
+          const titleParts = (
+            config.hero_title || defaultConfig.hero_title
+          ).split(" ");
+          if (titleParts.length >= 2) {
+            heroTitleEl.innerHTML = `<span class="text-white">${
+              titleParts[0]
+            }</span><br><span class="text-white">${titleParts
+              .slice(1)
+              .join(" ")}</span>`;
+          } else {
+            heroTitleEl.innerHTML = `<span class="text-white">${
+              config.hero_title || defaultConfig.hero_title
+            }</span>`;
+          }
+        }
+
+        const heroTaglineEl = document.getElementById("hero-tagline");
+        if (heroTaglineEl) {
+          heroTaglineEl.textContent =
+            config.hero_tagline || defaultConfig.hero_tagline;
+        }
+
+        const aboutTitleEl = document.getElementById("about-title");
+        if (aboutTitleEl) {
+          aboutTitleEl.textContent =
+            config.about_title || defaultConfig.about_title;
+        }
+
+        const visionTitleEl = document.getElementById("vision-title");
+        if (visionTitleEl) {
+          visionTitleEl.textContent =
+            config.vision_title || defaultConfig.vision_title;
+        }
+
+        const visionShortEl = document.getElementById("vision-short");
+        if (visionShortEl) {
+          visionShortEl.textContent =
+            config.vision_short || defaultConfig.vision_short;
+        }
+
+        const valuesTitleEl = document.getElementById("values-title");
+        if (valuesTitleEl) {
+          valuesTitleEl.textContent =
+            config.values_title || defaultConfig.values_title;
+        }
+
+        const servicesTitleEl = document.getElementById("services-title");
+        if (servicesTitleEl) {
+          servicesTitleEl.textContent =
+            config.services_title || defaultConfig.services_title;
+        }
+
+        const manifestTitleEl = document.getElementById("manifest-title");
+        if (manifestTitleEl) {
+          manifestTitleEl.textContent =
+            config.manifest_title || defaultConfig.manifest_title;
+        }
+
+        // Apply font changes
+        const customFont = config.font_family || defaultConfig.font_family;
+        document.querySelectorAll('[style*="Orbitron"]').forEach((el) => {
+          el.style.fontFamily = `${customFont}, Orbitron, sans-serif`;
+        });
+
+        // Apply font size scaling
+        const baseSize = config.font_size || defaultConfig.font_size;
+        document.documentElement.style.fontSize = `${baseSize}px`;
+
+        // Apply colors
+        const bgColor =
+          config.background_color || defaultConfig.background_color;
+        const primaryAccent =
+          config.primary_accent || defaultConfig.primary_accent;
+        const secondaryAccent =
+          config.secondary_accent || defaultConfig.secondary_accent;
+        const textColor = config.text_color || defaultConfig.text_color;
+        const surfaceColor =
+          config.surface_color || defaultConfig.surface_color;
+
+        document.body.style.backgroundColor = bgColor;
+        document.body.style.color = textColor;
+
+        document.documentElement.style.setProperty(
+          "--primary-accent",
+          primaryAccent
+        );
+        document.documentElement.style.setProperty(
+          "--secondary-accent",
+          secondaryAccent
+        );
+      }
+
+      function mapToCapabilities(config) {
+        return {
+          recolorables: [
+            {
+              get: () =>
+                config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              },
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                config.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              },
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              },
+            },
+            {
+              get: () => config.primary_accent || defaultConfig.primary_accent,
+              set: (value) => {
+                config.primary_accent = value;
+                window.elementSdk.setConfig({ primary_accent: value });
+              },
+            },
+            {
+              get: () =>
+                config.secondary_accent || defaultConfig.secondary_accent,
+              set: (value) => {
+                config.secondary_accent = value;
+                window.elementSdk.setConfig({ secondary_accent: value });
+              },
+            },
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            },
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            },
+          },
+        };
+      }
+
+      function mapToEditPanelValues(config) {
+        return new Map([
+          ["hero_title", config.hero_title || defaultConfig.hero_title],
+          ["hero_tagline", config.hero_tagline || defaultConfig.hero_tagline],
+          ["about_title", config.about_title || defaultConfig.about_title],
+          ["vision_title", config.vision_title || defaultConfig.vision_title],
+          ["vision_short", config.vision_short || defaultConfig.vision_short],
+          ["values_title", config.values_title || defaultConfig.values_title],
+          [
+            "services_title",
+            config.services_title || defaultConfig.services_title,
+          ],
+          [
+            "manifest_title",
+            config.manifest_title || defaultConfig.manifest_title,
+          ],
+        ]);
+      }
+
+      // Smooth scrolling for navigation
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+
+      // Initialize SDK
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities,
+          mapToEditPanelValues,
+        });
+      }
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'9bcb32cd4389a634',t:'MTc2ODIwNTY0Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
